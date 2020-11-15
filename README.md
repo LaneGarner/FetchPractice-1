@@ -3,7 +3,7 @@
 * Create a new repo in your GitHub called "FetchPractice-1"
 * Clone it into your devFolder
 * Inside the new repo create two files: index.html and main.js
-* Copy/paste the code below into the respective files
+* Copy/paste the code into the respective files
 
 * While working throughout this fetch practice make sure you reference and read in its entirety the MDN Docs on fetch()
 * Using the documents at jsonplaceholder, for each of the buttons listed in the index.html file:

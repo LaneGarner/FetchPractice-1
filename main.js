@@ -1,9 +1,12 @@
-let arrayOfPosts;
+let arrayOfPosts, arrayOfFive, arrayOfComments, arrayOfUsers;
 
 // This function waits for the web page to be loaded, when it does it will run the code inside of it which happens to be getPosts()
 window.onload = function() {
     getPosts()
-
+    fetchFive()
+    fetchComments()
+    fetchUsers()
+    console.log(arrayOfComments)
 }
 
 // This function is going to make a fetch request to the URL inside its parameter brackets (). Then it will turn the response (data it's getting back), saved here as res. The res.json will not be saved as posts and saved into the variable, arrayOfPosts
@@ -28,5 +31,54 @@ const displayPost = () => {
         allPosts.append(li)
     })
 }
+
+const fetchFive = () => {
+    fetch('http://jsonplaceholder.typicode.com/posts?_limit=5')
+    .then(res => res.json())
+    .then(posts => arrayOfFive = posts)
+}
+
+const displayFive = () => {
+    const fivePosts = document.getElementById('five-posts')
+    arrayOfFive.map((post, index) => {
+        const li = document.createElement('li')
+        const text = document.createTextNode(`#${index}, Title: ${post.title}:  ${post.body}, by user: ${post.userId}`)
+        li.appendChild(text)
+        fivePosts.append(li)
+    })
+}
+
+const fetchComments = () => {
+    fetch('http://jsonplaceholder.typicode.com/comments')
+    .then(res => res.json())
+    .then(posts => arrayOfComments = posts)
+}
+
+const displayComments = () => {
+    const comments = document.getElementById('comments')
+    arrayOfComments.map((post, index) => {
+        const li = document.createElement('li')
+        const text = document.createTextNode(`#${index}, Comments: ${post.body}`)
+        li.appendChild(text)
+        comments.append(li)
+    })
+}
+
+const fetchUsers = () => {
+    fetch('http://jsonplaceholder.typicode.com/users')
+    .then(res => res.json())
+    .then(posts => arrayOfUsers = posts)
+}
+
+const displayUsers = () => {
+    const users = document.getElementById('users')
+    arrayOfUsers.map((post, index) => {
+        const li = document.createElement('li')
+        const text = document.createTextNode(`#${index}, Users: ${post.name}`)
+        li.appendChild(text)
+        users.append(li)
+    })
+}
+
 
 // Your job now is to follow the functions above and use them as templates to build the functionality the buttons in the index.html file already have laid out in it. This way you can learn how to build fetch requests and work with other APIs and become a real developer!!
