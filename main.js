@@ -6,15 +6,31 @@ window.onload = function() {
     fetchFive()
     fetchComments()
     fetchUsers()
-    console.log(arrayOfComments)
 }
 
 // This function is going to make a fetch request to the URL inside its parameter brackets (). Then it will turn the response (data it's getting back), saved here as res. The res.json will not be saved as posts and saved into the variable, arrayOfPosts
+// const getPosts = () => {
+//     fetch('http://jsonplaceholder.typicode.com/posts')
+//         .then(res => res.json())
+//         .then(posts => arrayOfPosts = posts)
+// }
+
+let checkFetch = (response) => {
+    if (!response.ok) {
+        throw Error(`${response.statusText} - ${response.url}`)
+    }
+    return response
+}
+
 const getPosts = () => {
     fetch('http://jsonplaceholder.typicode.com/posts')
-        .then(res => res.json())
-        .then(posts => arrayOfPosts = posts)
-}
+    .then(checkFetch)
+    .then(res => {
+        return res.json()
+    })
+    .then(posts => arrayOfPosts = posts)
+    .catch(err => console.log(`Error,  ${err}`))
+  }
 
 // This function logs the results in your browser's console
 const consolePosts = () => {
@@ -34,8 +50,10 @@ const displayPost = () => {
 
 const fetchFive = () => {
     fetch('http://jsonplaceholder.typicode.com/posts?_limit=5')
+    .then(checkFetch)
     .then(res => res.json())
     .then(posts => arrayOfFive = posts)
+    .catch(err => console.log(`Error,  ${err}`))
 }
 
 const displayFive = () => {
@@ -50,8 +68,10 @@ const displayFive = () => {
 
 const fetchComments = () => {
     fetch('http://jsonplaceholder.typicode.com/comments')
+    .then(checkFetch)
     .then(res => res.json())
     .then(posts => arrayOfComments = posts)
+    .catch(err => console.log(`Error,  ${err}`))
 }
 
 const displayComments = () => {
@@ -66,8 +86,10 @@ const displayComments = () => {
 
 const fetchUsers = () => {
     fetch('http://jsonplaceholder.typicode.com/users')
+    .then(checkFetch)
     .then(res => res.json())
     .then(posts => arrayOfUsers = posts)
+    .catch(err => console.log(`Error,  ${err}`))
 }
 
 const displayUsers = () => {
